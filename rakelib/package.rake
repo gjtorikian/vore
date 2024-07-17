@@ -27,7 +27,7 @@ namespace :build do
     system("make dist")
   end
 end
-task gem: "build:native"
+task gem: "build:native" # rubocop:disable Rake/Desc
 
 exedir = File.join(gemspec.bindir, NATIVE_PLATFORMS[PLATFORM])
 exepath = File.join(exedir, "spider")
