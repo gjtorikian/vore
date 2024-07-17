@@ -1,0 +1,26 @@
+name: Tag and Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "lib/vore/version.rb"
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  ruby:
+    uses: yettoapp/actions/.github/workflows/ruby_gem_release.yml@main
+    secrets:
+      rubygems_api_key: ${{ secrets.RUBYGEMS_API_BOT_KEY }}
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      gem_name: vore
+      version_filepath: lib/vore/version.rb
+      multiplatform: true
+      oxidized: true
+      prepare: ${{ github.event_name == 'push' }}
+      release: ${{ github.event_name == 'workflow_dispatch' || ((github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'release'))) }}

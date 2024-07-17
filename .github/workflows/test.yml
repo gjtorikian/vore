@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oxidize-rb/actions/setup-ruby-and-rust@main
+        with:
+          rubygems: latest
+          bundler-cache: true
+          cargo-cache: true
+          cache-version: v1
+
+      - name: Compile dependencies
+        run: bundle exec rake compile
+
+      - name: Run Ruby tests
+        run: bundle exec rake test

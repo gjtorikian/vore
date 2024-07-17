@@ -1,0 +1,17 @@
+[package]
+name = "vore"
+version = "0.1.0"
+edition = "2021"
+authors = ["Garen J. Torikian <gjtorikian@users.noreply.github.com>"]
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+magnus = { version = "0.6", features = ["rb-sys"] }
+rb-sys = { version = "*", default-features = false, features = [
+    "stable-api-compiled-fallback",
+] }
+spider_cli = { version = "1.99" }
