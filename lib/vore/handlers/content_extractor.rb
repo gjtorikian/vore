@@ -20,7 +20,6 @@ module Vole
 
       def handle_element(element)
         if element.tag_name == "pre" ||
-            element.tag_name == "code" ||
             element.tag_name == "form" ||
             element.tag_name == "style" ||
             element.tag_name == "noscript" ||
