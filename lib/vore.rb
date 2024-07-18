@@ -14,6 +14,9 @@ require_relative "vore/version"
 require_relative "vore/configuration"
 require_relative "vore/logger"
 require_relative "vore/crawler"
+require_relative "vore/page"
+require_relative "vore/page_data"
+require_relative "vore/website"
 
 module Vore
 end

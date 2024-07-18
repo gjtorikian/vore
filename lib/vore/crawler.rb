@@ -6,15 +6,17 @@ module Vore
   # This is the class that starts and controls the crawling
   class Crawler
     PLATFORM = [:cpu, :os].map { |m| Gem::Platform.local.send(m) }.join("-")
+    FILE_SEPERATOR = PLATFORM.include?("windows") ? File::ALT_SEPARATOR : File::SEPARATOR
 
     # Creates a crawler
     # denylist: Sets a denylist filter, allows a regexp, string or array of either to be matched.
     def initialize(denylist: /a^/, sanitization_config: Vole::Configuration::DEFAULT_SANITIZATION_CONFIG)
       @denylist_regexp = Regexp.union(denylist)
 
-      @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [Vole::Handlers::ContentExtractor.new])
+      @content_extractor = Vole::Handlers::ContentExtractor.new
+      @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [@content_extractor])
       ext = PLATFORM.include?("windows") ? ".exe" : ""
-      @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(File::ALT_SEPARATOR || File::SEPARATOR))
+      @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(FILE_SEPERATOR))
       @output_dir = "tmp/vore"
 
       return if File.exist?(@executable)
@@ -42,7 +44,17 @@ module Vore
         html_file = File.read(path).force_encoding("UTF-8")
         rewritten_html_file = @selma.rewrite(html_file)
 
-        yield rewritten_html_file
+        # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
+        url_path = path.split(FILE_SEPERATOR)[3..].join("/")
+
+        page = Vore::PageData.new(
+          content: rewritten_html_file,
+          title: @content_extractor.title,
+          meta: @content_extractor.meta,
+          path: url_path,
+        )
+
+        yield page
       ensure
         File.delete(path) if File.file?(path)
       end
