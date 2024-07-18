@@ -31,7 +31,7 @@ module Vore
       @output_dir = "#{@parent_output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
       Vore.logger.info("Vore started crawling #{website}, outputting to #{output_dir}")
 
-      output = run_command(website, @output_dir)
+      output = run_command(website)
 
       Vore.logger.info("Vore finished crawling #{website}: #{output}")
 
@@ -86,14 +86,14 @@ module Vore
     #   crawl_site(site)
     # end
 
-    def run_command(website, output_dir)
+    def run_command(website)
       %x(#{@executable} \
         --user-agent #{user_agent} \
         --delay 3500 \
         --url #{website} \
         download \
         -t \
-        #{output_dir})
+        #{@output_dir})
     end
 
     def user_agent
