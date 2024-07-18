@@ -7,29 +7,18 @@ module Vore
   class Crawler
     PLATFORM = [:cpu, :os].map { |m| Gem::Platform.local.send(m) }.join("-")
 
-    # keep this synchronized with package.rake
-    NATIVE_PLATFORMS = {
-      "arm64-darwin" => "exe/aarch64-apple-darwin",
-      "x86_64-darwin" => "exe/x86_64-apple-darwin",
-
-      "arm64-linux" => "exe/aarch64-unknown-linux-gnu",
-      "x86_64-linux" => "exe/x86_64-unknown-linux-gnu",
-
-      "x86_64-windows" => "exe/x86_64-pc-windows-msvc",
-    }
-
     # Creates a crawler
     # denylist: Sets a denylist filter, allows a regexp, string or array of either to be matched.
     def initialize(denylist: /a^/, sanitization_config: Vole::Configuration::DEFAULT_SANITIZATION_CONFIG)
       @denylist_regexp = Regexp.union(denylist)
 
       @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [Vole::Handlers::ContentExtractor.new])
-      @executable = File.expand_path(File.join(NATIVE_PLATFORMS[PLATFORM], "bin", "spider"))
+      @executable = File.expand_path(File.join("exe", "spider"))
       @output_dir = "tmp/vore"
 
       return if File.exist?(@executable)
 
-      warn("ERROR: Unsupported platform: #{PLATFORM}")
+      warn("ERROR: Unsupported platform: `#{PLATFORM}`")
       exit(1)
     end
 

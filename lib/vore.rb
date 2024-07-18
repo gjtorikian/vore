@@ -12,7 +12,6 @@ require "selma"
 
 require_relative "vore/version"
 require_relative "vore/configuration"
-require_relative "vore/vore"
 require_relative "vore/logger"
 require_relative "vore/crawler"
 

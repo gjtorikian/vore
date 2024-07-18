@@ -1,24 +1,30 @@
 # Vore
 
-TODO: Delete this and the text below, and describe your gem
+![Vore, by LewdBacon](https://github.com/user-attachments/assets/76e65deb-2b56-4309-b8b3-cb98c439262d)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/vore`. To experiment with that code, run `bin/console` for an interactive prompt.
+Vore gobbles up webpages and spits out their content.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
 
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add vore
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install vore
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+    crawler = Vore::Crawler.new
+    crawler.scrape_each_page("https://choosealicense.com") do |page|
+      puts page
+    end
+```
+
+Each `page` is simply every text node. The scraping is managed by [`spider-rs`](https://github.com/spider-rs/spider), so you know it's fast.
 
 ## Development
 
@@ -28,7 +34,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/vore.
+Bug reports and pull requests are welcome on GitHub at https://github.com/gjtorikian/vore.
 
 ## License
 
