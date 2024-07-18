@@ -14,6 +14,17 @@ class TestVoreCrawler < Minitest::Test
     end
   end
 
+  def test_it_can_configure_delay
+    crawler = Vore::Crawler.new(options: { delay: 100 })
+    crawler.scrape_each_page("https://choosealicense.com") do |page|
+      assert(page.title)
+      assert(page.meta)
+      assert(page.content)
+      refute_equal(page.content, "")
+      refute_includes(page.content, page.title)
+    end
+  end
+
   def test_it_can_crawl_a_site_that_has_bad_encoding
     # Vore::Crawler.new.scrape_each_page("https://docs.github.com") do |page|
     #   assert(page.content)

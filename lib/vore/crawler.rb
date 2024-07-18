@@ -12,7 +12,7 @@ module Vore
 
     # Creates a crawler
     # denylist: Sets a denylist filter, allows a regexp, string or array of either to be matched.
-    def initialize(denylist: /a^/, sanitization_config: Vole::Configuration::DEFAULT_SANITIZATION_CONFIG)
+    def initialize(denylist: /a^/, sanitization_config: Vole::Configuration::DEFAULT_SANITIZATION_CONFIG, options: Vole::Configuration::DEFAULT_OPTIONS)
       @denylist_regexp = Regexp.union(denylist)
 
       @content_extractor = Vole::Handlers::ContentExtractor.new
@@ -20,6 +20,7 @@ module Vore
       ext = PLATFORM.include?("windows") ? ".exe" : ""
       @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(FILE_SEPERATOR))
       @parent_output_dir = "tmp/vore"
+      @options = options
 
       return if File.exist?(@executable)
 
@@ -31,7 +32,7 @@ module Vore
       @output_dir = "#{@parent_output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
       Vore.logger.info("Vore started crawling #{website}, outputting to #{output_dir}")
 
-      output = run_command(website)
+      output = run_command(website, delay: @options[:delay])
 
       Vore.logger.info("Vore finished crawling #{website}: #{output}")
 
@@ -86,10 +87,10 @@ module Vore
     #   crawl_site(site)
     # end
 
-    def run_command(website)
+    def run_command(website, delay: 3500)
       %x(#{@executable} \
         --user-agent #{user_agent} \
-        --delay 3500 \
+        --delay #{delay} \
         --url #{website} \
         download \
         -t \
