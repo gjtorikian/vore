@@ -40,7 +40,7 @@ def build
   puts "Running `#{cmd}`"
   %x(#{cmd})
   FileUtils.mkdir_p("exe")
-  FileUtils.cp("dist/#{TARGET}/bin/spider", "exe/vore-spider")
+  FileUtils.cp(File.join("dist", TARGET, "bin", "spider"), File.join("exe", "vore-spider"))
 end
 
 NATIVE_PLATFORMS.each do |platform, _executable|
