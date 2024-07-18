@@ -51,14 +51,22 @@ module Vore
         results[:pages_visited] += 1
 
         html_file = File.read(path).force_encoding("UTF-8")
+        rewritten_html_file = ""
 
         if html_file.empty?
+          Vore.logger.warn("HTML file empty: #{path}")
           results[:pages_unprocessed] += 1
           results[:unprocessed_pages] << path
           next
         end
 
-        rewritten_html_file = @selma.rewrite(html_file)
+        begin
+          rewritten_html_file = @selma.rewrite(html_file)
+        rescue StandardError => e
+          Vore.logger.warn("Error rewriting #{path}: #{e}")
+          results[:pages_unprocessed] += 1
+          next
+        end
 
         # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
         url_path = path.split(FILE_SEPERATOR)[3..].join("/")
