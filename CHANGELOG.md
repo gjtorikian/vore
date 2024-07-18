@@ -1,3 +1,5 @@
+# [v0.2.0] - 18-07-2024
+**Full Changelog**: https://github.com/gjtorikian/vore/compare/v0.1.1.3...v0.2.0
 # [v0.1.1.4] - 18-07-2024
 **Full Changelog**: https://github.com/gjtorikian/vore/compare/v0.1.1.3...v0.1.1.4
 # [v0.1.1.3] - 18-07-2024
