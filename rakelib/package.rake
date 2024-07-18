@@ -40,30 +40,29 @@ def build
   puts "Running `#{cmd}`"
   %x(#{cmd})
   FileUtils.mkdir_p("exe")
-  FileUtils.mv("dist/#{TARGET}/bin/spider", "exe/spider")
+  FileUtils.cp("dist/#{TARGET}/bin/spider", "exe/vore-spider")
 end
 
-BASE_GEMSPEC.dup.tap do |gemspec|
-  exedir = File.join(gemspec.bindir, NATIVE_PLATFORMS[PLATFORM])
-  exepath = File.join(exedir, "spider")
+NATIVE_PLATFORMS.each do |platform, executable|
+  BASE_GEMSPEC.dup.tap do |gemspec|
+    exedir = File.join(gemspec.bindir)
+    exepath = File.join(exedir, "vore-spider")
 
-  gemspec.platform = PLATFORM
-  gemspec.files << exepath
+    gemspec.platform = platform
+    gemspec.files << exepath
 
-  distdir = File.join("dist", NATIVE_PLATFORMS[PLATFORM])
-  distpath = File.join(distdir, "bin", "spider")
-  gem_path = Gem::PackageTask.new(gemspec).define
+    gem_path = Gem::PackageTask.new(gemspec).define
 
-  desc "Build the #{PLATFORM} gem"
-  task "gem:#{PLATFORM}" => [gem_path]
+    desc "Build the #{platform} gem"
+    task "gem:#{platform}" => [gem_path]
 
-  directory exedir
-  file exepath => [exedir] do
-    FileUtils.cp(distpath, exepath)
-    FileUtils.chmod(0o755, exepath)
+    directory exedir
+    file exepath => [exedir] do
+      FileUtils.chmod(0o755, exepath)
+    end
+
+    CLOBBER.add(exedir)
   end
-
-  CLOBBER.add(exedir)
 end
 
 CLOBBER.add("dist")

@@ -13,7 +13,7 @@ module Vore
       @denylist_regexp = Regexp.union(denylist)
 
       @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [Vole::Handlers::ContentExtractor.new])
-      @executable = File.expand_path(File.join("exe", "spider"))
+      @executable = File.expand_path(File.join("exe", "vore-spider"))
       @output_dir = "tmp/vore"
 
       return if File.exist?(@executable)

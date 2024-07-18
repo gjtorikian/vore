@@ -15,3 +15,4 @@ target/
 exe/**
 !exe/.gitkeep
 dist/
+Gemfile.lock
