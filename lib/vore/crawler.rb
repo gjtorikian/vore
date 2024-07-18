@@ -8,6 +8,8 @@ module Vore
     PLATFORM = [:cpu, :os].map { |m| Gem::Platform.local.send(m) }.join("-")
     FILE_SEPERATOR = PLATFORM.include?("windows") ? File::ALT_SEPARATOR : File::SEPARATOR
 
+    attr_reader :output_dir
+
     # Creates a crawler
     # denylist: Sets a denylist filter, allows a regexp, string or array of either to be matched.
     def initialize(denylist: /a^/, sanitization_config: Vole::Configuration::DEFAULT_SANITIZATION_CONFIG)
@@ -26,16 +28,10 @@ module Vore
     end
 
     def scrape_each_page(website, &block)
-      output_dir = "#{@parent_output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
+      @output_dir = "#{@parent_output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
       Vore.logger.info("Vore started crawling #{website}, outputting to #{output_dir}")
 
-      output = %x(#{@executable} \
-        --user-agent #{user_agent} \
-        --delay 3500 \
-        --url #{website} \
-        download \
-        -t \
-        #{output_dir})
+      output = run_command(website, @output_dir)
 
       Vore.logger.info("Vore finished crawling #{website}: #{output}")
 
@@ -54,7 +50,6 @@ module Vore
         rewritten_html_file = ""
 
         if html_file.empty?
-          Vore.logger.warn("HTML file empty: #{path}")
           results[:pages_unprocessed] += 1
           results[:unprocessed_pages] << path
           next
@@ -90,6 +85,16 @@ module Vore
     #   Vore.logger.info "Visiting #{site.url}, visited_links: #{@collection.visited_pages.size}, discovered #{@collection.discovered_pages.size}"
     #   crawl_site(site)
     # end
+
+    def run_command(website, output_dir)
+      %x(#{@executable} \
+        --user-agent #{user_agent} \
+        --delay 3500 \
+        --url #{website} \
+        download \
+        -t \
+        #{output_dir})
+    end
 
     def user_agent
       "'Mozilla/5.0 (compatible; Vore/#{Vore::VERSION}; +https://github.com/gjtorikian/vore)'"
