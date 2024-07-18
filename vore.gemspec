@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Garen J. Torikian"]
   spec.email = ["gjtorikian@users.noreply.github.com"]
 
-  spec.summary = "Quickly consume websites and spit out text. Powered by Rust."
+  spec.summary = "Quickly crawls websites and spits out text sans tags. Powered by Rust."
   spec.homepage = "https://github.com/gjtorikian/vore"
   spec.license = "MIT"
   spec.required_ruby_version = "~> 3.1"

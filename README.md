@@ -2,7 +2,7 @@
 
 ![Vore, by LewdBacon](https://github.com/user-attachments/assets/0923cc84-4cca-4d95-8a0e-4dad650525d2)
 
-Vore gobbles up webpages and spits out their content.
+Vore quickly crawls websites and spits out text sans tags. It's written in Ruby and powered by Rust.
 
 ## Installation
 
