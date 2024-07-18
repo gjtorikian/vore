@@ -31,7 +31,7 @@ module Vore
 
       output = %x(#{@executable} \
         --user-agent #{user_agent} \
-        --delay 3000 \
+        --delay 3500 \
         --url #{website} \
         download \
         -t \
@@ -48,15 +48,17 @@ module Vore
       Dir.glob(File.join(output_dir, "**", "*")).each do |path|
         next unless File.file?(path)
 
-        html_file = File.read(path).force_encoding("UTF-8")
-        rewritten_html_file = @selma.rewrite(html_file)
-
         results[:pages_visited] += 1
-        if rewritten_html_file.empty?
+
+        html_file = File.read(path).force_encoding("UTF-8")
+
+        if html_file.empty?
           results[:pages_unprocessed] += 1
           results[:unprocessed_pages] << path
           next
         end
+
+        rewritten_html_file = @selma.rewrite(html_file)
 
         # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
         url_path = path.split(FILE_SEPERATOR)[3..].join("/")
