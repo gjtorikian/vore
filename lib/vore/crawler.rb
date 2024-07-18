@@ -31,7 +31,7 @@ module Vore
 
       output = %x(#{@executable} \
         --user-agent #{user_agent} \
-        --delay 3000
+        --delay 3000 \
         --url #{website} \
         download \
         -t \
