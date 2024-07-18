@@ -43,7 +43,7 @@ def build
   FileUtils.cp("dist/#{TARGET}/bin/spider", "exe/vore-spider")
 end
 
-NATIVE_PLATFORMS.each do |platform, executable|
+NATIVE_PLATFORMS.each do |platform, _executable|
   BASE_GEMSPEC.dup.tap do |gemspec|
     exedir = File.join(gemspec.bindir)
     exepath = File.join(exedir, "vore-spider")
