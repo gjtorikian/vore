@@ -33,7 +33,7 @@ namespace :build do
 end
 task gem: "build:native" # rubocop:disable Rake/Desc
 
-TARGET = %x(rustc -vV | sed -n 's|host: ||p').strip
+TARGET = ENV.fetch("TOOLCHAIN", %x(rustc -vV | sed -n 's|host: ||p').strip)
 SPIDER_VERSION = "1.99.5"
 def build
   cmd = "cargo install --root dist/#{TARGET} --version #{SPIDER_VERSION} --target #{TARGET} spider_cli"
