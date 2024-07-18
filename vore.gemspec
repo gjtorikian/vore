@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.extensions = ["ext/vore/Cargo.toml"]
+  # spec.extensions = ["ext/vore/Cargo.toml"]
 
   spec.add_dependency("selma", "~> 0.4")
 end
