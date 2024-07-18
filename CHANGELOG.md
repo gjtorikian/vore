@@ -1,3 +1,9 @@
+# [v0.3.0] - 18-07-2024
+## What's Changed
+* [skip test] Release v0.2.9 by @github-actions in https://github.com/gjtorikian/vore/pull/15
+
+
+**Full Changelog**: https://github.com/gjtorikian/vore/compare/v0.2.8...v0.3.0
 # [v0.2.9] - 18-07-2024
 **Full Changelog**: https://github.com/gjtorikian/vore/compare/v0.2.8...v0.2.9
 # [v0.2.8] - 18-07-2024
