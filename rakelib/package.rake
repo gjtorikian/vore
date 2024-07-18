@@ -25,8 +25,8 @@ gem_path = Gem::PackageTask.new(BASE_GEMSPEC).define
 desc "Build the ruby gem"
 task "gem:ruby" => [gem_path]
 
-desc "Build native executables"
 namespace :build do
+  desc "Build native executables"
   task :native do
     build
   end
