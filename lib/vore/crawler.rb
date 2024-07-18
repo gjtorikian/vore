@@ -17,7 +17,7 @@ module Vore
       @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [@content_extractor])
       ext = PLATFORM.include?("windows") ? ".exe" : ""
       @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(FILE_SEPERATOR))
-      @output_dir = "tmp/vore"
+      @parent_output_dir = "tmp/vore"
 
       return if File.exist?(@executable)
 
@@ -26,7 +26,7 @@ module Vore
     end
 
     def scrape_each_page(website, &block)
-      output_dir = "#{@output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
+      output_dir = "#{@parent_output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
       Vore.logger.info("Vore started crawling #{website}, outputting to #{output_dir}")
 
       output = %x(#{@executable} \
@@ -38,7 +38,7 @@ module Vore
 
       Vore.logger.info("Vore finished crawling #{website}: #{output}")
 
-      Dir.glob("tmp/**/*").each do |path|
+      Dir.glob(File.join(output_dir, "**", "*")).each do |path|
         next unless File.file?(path)
 
         html_file = File.read(path).force_encoding("UTF-8")
