@@ -1,6 +1,6 @@
 # Vore
 
-![Vore, by LewdBacon](https://github.com/user-attachments/assets/76e65deb-2b56-4309-b8b3-cb98c439262d)
+![Vore, by LewdBacon](https://github.com/user-attachments/assets/0923cc84-4cca-4d95-8a0e-4dad650525d2)
 
 Vore gobbles up webpages and spits out their content.
 
