@@ -33,20 +33,51 @@ namespace :build do
 end
 task gem: "build:native" # rubocop:disable Rake/Desc
 
-TARGET = ENV.fetch("TOOLCHAIN", %x(rustc -vV | sed -n 's|host: ||p').strip)
+TARGET = ENV["TOOLCHAIN"] || %x(rustc -vV | sed -n 's|host: ||p').strip
 SPIDER_VERSION = "1.99.5"
 def build
-  cmd = "cargo install --root dist/#{TARGET} --version #{SPIDER_VERSION} --target #{TARGET} spider_cli"
+  dist_dir = if TARGET.include?("windows")
+    ["dist", TARGET].join("\\")
+  else
+    File.join("dist", TARGET)
+  end
+
+  cmd = if TARGET.include?("aarch64") && TARGET.include?("linux")
+    [
+      "git clone --depth 1 --branch v#{SPIDER_VERSION} https://github.com/spider-rs/spider.git",
+      "cp Cross.toml spider/spider_cli",
+      "cd spider/spider_cli",
+      "CROSS_CONFIG=Cross.toml cross build --release --target #{TARGET} --target-dir ../../#{dist_dir}",
+    ].join(";\n")
+  else
+    "cargo install --root #{dist_dir} --version #{SPIDER_VERSION} --target #{TARGET} spider_cli"
+  end
+
   puts "Running `#{cmd}`"
   %x(#{cmd})
+
   FileUtils.mkdir_p("exe")
-  FileUtils.cp(File.join("dist", TARGET, "bin", "spider"), File.join("exe", "vore-spider"))
+  executable = if TARGET.include?("windows")
+    [dist_dir, "bin", "spider.exe"].join("\\")
+  elsif TARGET.include?("aarch64") && TARGET.include?("linux")
+    File.join(dist_dir, TARGET, "release", "spider")
+  else
+    File.join(dist_dir, "bin", "spider")
+  end
+
+  dest_dir = if TARGET.include?("windows")
+    [BASE_GEMSPEC.bindir, "vore-spider.exe"].join("\\")
+  else
+    File.join(BASE_GEMSPEC.bindir, "vore-spider")
+  end
+  FileUtils.cp(executable, dest_dir)
 end
 
 NATIVE_PLATFORMS.each do |platform, _executable|
   BASE_GEMSPEC.dup.tap do |gemspec|
     exedir = File.join(gemspec.bindir)
-    exepath = File.join(exedir, "vore-spider")
+    ext = platform.include?("windows") ? ".exe" : ""
+    exepath = File.join(exedir, "vore-spider#{ext}")
 
     gemspec.platform = platform
     gemspec.files << exepath

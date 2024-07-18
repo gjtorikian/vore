@@ -13,7 +13,8 @@ module Vore
       @denylist_regexp = Regexp.union(denylist)
 
       @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [Vole::Handlers::ContentExtractor.new])
-      @executable = File.expand_path(File.join("exe", "vore-spider"))
+      ext = PLATFORM.include?("windows") ? ".exe" : ""
+      @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(File::ALT_SEPARATOR || File::SEPARATOR))
       @output_dir = "tmp/vore"
 
       return if File.exist?(@executable)
@@ -38,7 +39,7 @@ module Vore
       Dir.glob("tmp/**/*").each do |path|
         next unless File.file?(path)
 
-        html_file = File.read(path)
+        html_file = File.read(path).force_encoding("UTF-8")
         rewritten_html_file = @selma.rewrite(html_file)
 
         yield rewritten_html_file

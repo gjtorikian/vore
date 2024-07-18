@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# This script is only used in CI, to prepare for compilation
-
-set -e
-
-sudo apt-get install -y --no-install-recommends libssl-dev
