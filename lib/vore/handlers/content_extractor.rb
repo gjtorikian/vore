@@ -19,7 +19,13 @@ module Vole
       end
 
       def handle_element(element)
-        if element.tag_name == "pre" || element.tag_name == "code" || element.tag_name == "script" || element.tag_name == "form"
+        if element.tag_name == "pre" ||
+            element.tag_name == "code" ||
+            element.tag_name == "form" ||
+            element.tag_name == "style" ||
+            element.tag_name == "noscript" ||
+            element.tag_name == "script" ||
+            element.tag_name == "svg"
           element.remove
         elsif element.tag_name == "title"
           @within_title = true

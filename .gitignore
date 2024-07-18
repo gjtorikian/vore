@@ -16,3 +16,4 @@ exe/**
 !exe/.gitkeep
 dist/
 Gemfile.lock
+_temp_spider_downloads

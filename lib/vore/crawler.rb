@@ -31,6 +31,7 @@ module Vore
 
       output = %x(#{@executable} \
         --user-agent #{user_agent} \
+        --delay 3000
         --url #{website} \
         download \
         -t \
@@ -38,11 +39,24 @@ module Vore
 
       Vore.logger.info("Vore finished crawling #{website}: #{output}")
 
+      results = {
+        pages_visited: 0,
+        pages_unprocessed: 0,
+        unprocessed_pages: [],
+      }
+
       Dir.glob(File.join(output_dir, "**", "*")).each do |path|
         next unless File.file?(path)
 
         html_file = File.read(path).force_encoding("UTF-8")
         rewritten_html_file = @selma.rewrite(html_file)
+
+        results[:pages_visited] += 1
+        if rewritten_html_file.empty?
+          results[:pages_unprocessed] += 1
+          results[:unprocessed_pages] << path
+          next
+        end
 
         # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
         url_path = path.split(FILE_SEPERATOR)[3..].join("/")
@@ -58,6 +72,8 @@ module Vore
       ensure
         File.delete(path) if File.file?(path)
       end
+
+      results
     end
 
     # def crawl(site, block)
