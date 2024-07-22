@@ -27,5 +27,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   # spec.extensions = ["ext/vore/Cargo.toml"]
 
+  spec.add_dependency("listen", "~> 3.9")
   spec.add_dependency("selma", "~> 0.4")
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Vole
+module Vore
   module Handlers
     class ContentExtractor
       SELECTOR = Selma::Selector.new(match_element: "*", match_text_within: "title")

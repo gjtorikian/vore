@@ -2,6 +2,8 @@
 
 require_relative "handlers/content_extractor"
 
+require "listen"
+
 module Vore
   # This is the class that starts and controls the crawling
   class Crawler
@@ -12,15 +14,22 @@ module Vore
 
     # Creates a crawler
     # denylist: Sets a denylist filter, allows a regexp, string or array of either to be matched.
-    def initialize(denylist: /a^/, sanitization_config: Vole::Configuration::DEFAULT_SANITIZATION_CONFIG, options: Vole::Configuration::DEFAULT_OPTIONS)
-      @denylist_regexp = Regexp.union(denylist)
-
-      @content_extractor = Vole::Handlers::ContentExtractor.new
+    def initialize(sanitization_config: Vore::Configuration::DEFAULT_SANITIZATION_CONFIG, options: {})
+      @content_extractor = Vore::Handlers::ContentExtractor.new
       @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [@content_extractor])
       ext = PLATFORM.include?("windows") ? ".exe" : ""
       @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(FILE_SEPERATOR))
-      @parent_output_dir = "tmp/vore"
-      @options = options
+      @options = Vore::Configuration::DEFAULT_OPTIONS.merge(options)
+      @parent_output_dir = @options[:output_dir]
+      @parent_output_dir_len = @parent_output_dir.to_s.split(FILE_SEPERATOR).size
+
+      Vore.logger.level = @options[:log_level]
+      Listen.logger = Vore.logger
+
+      @results = {
+        pages_visited: 0,
+        unprocessed_pages: [],
+      }
 
       return if File.exist?(@executable)
 
@@ -30,71 +39,82 @@ module Vore
 
     def scrape_each_page(website, &block)
       @output_dir = "#{@parent_output_dir}/#{website.gsub(/[^a-zA-Z0-9]/, "_").squeeze("_")}"
+      FileUtils.rm_rf(@output_dir)
+      FileUtils.mkdir_p(@output_dir)
+
+      listener = Listen.to(@output_dir) do |_modified, added, _removed|
+        if added.any?
+          added.each do |path|
+            process_file(path, &block)
+            File.delete(path) if @options[:delete_after_yield]
+          end
+        end
+      end
+      listener.start
+
       Vore.logger.info("Vore started crawling #{website}, outputting to #{output_dir}")
 
-      output = run_command(website, delay: @options[:delay])
-
-      Vore.logger.info("Vore finished crawling #{website}: #{output}")
-
-      results = {
-        pages_visited: 0,
-        pages_unprocessed: 0,
-        unprocessed_pages: [],
-      }
-
-      Dir.glob(File.join(output_dir, "**", "*")).each do |path|
-        next unless File.file?(path)
-
-        results[:pages_visited] += 1
-
-        html_file = File.read(path).force_encoding("UTF-8")
-        rewritten_html_file = ""
-
-        if html_file.empty?
-          results[:pages_unprocessed] += 1
-          results[:unprocessed_pages] << path
-          next
-        end
-
-        begin
-          rewritten_html_file = @selma.rewrite(html_file)
-        rescue StandardError => e
-          Vore.logger.warn("Error rewriting #{path}: #{e}")
-          results[:pages_unprocessed] += 1
-          next
-        end
-
-        # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
-        url_path = path.split(FILE_SEPERATOR)[3..].join("/")
-
-        page = Vore::PageData.new(
-          content: rewritten_html_file,
-          title: @content_extractor.title,
-          meta: @content_extractor.meta,
-          path: url_path,
-        )
-
-        yield page
+      begin
+        run_command(website, delay: @options[:delay])
       ensure
-        File.delete(path) if File.file?(path)
+        sleep(0.5) # give listener time to clean up
+        listener.stop
       end
 
-      results
+      Vore.logger.info("Vore finished crawling #{website}")
+
+      @results
     end
 
-    # def crawl(site, block)
-    #   Vore.logger.info "Visiting #{site.url}, visited_links: #{@collection.visited_pages.size}, discovered #{@collection.discovered_pages.size}"
-    #   crawl_site(site)
-    # end
+    def process_file(path, &block)
+      @results[:pages_visited] += 1
 
-    def run_command(website, delay: 3500)
-      %x(#{@executable} \
-        --user-agent #{user_agent} \
-        --delay #{delay} \
-        --url #{website} \
-        download \
-        -t \
-        #{@output_dir})
+      html_file = File.read(path).force_encoding("UTF-8")
+      rewritten_html_file = ""
+
+      if html_file.empty?
+        @results[:unprocessed_pages] << path
+        return
+      end
+
+      begin
+        rewritten_html_file = @selma.rewrite(html_file)
+      rescue StandardError => e
+        Vore.logger.warn("Error rewriting #{path}: #{e}")
+        @results[:unprocessed_pages] << path
+        return
+      end
+
+      # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
+      url_path = path.split(FILE_SEPERATOR)[(@parent_output_dir_len + 1)..].join("/")
+
+      page = Vore::PageData.new(
+        content: rewritten_html_file,
+        title: @content_extractor.title,
+        meta: @content_extractor.meta,
+        path: url_path,
+      )
+
+      yield page
+    end
+
+    def run_command(website, delay: 0)
+      pid = Process.spawn(
+        @executable,
+        "--user-agent",
+        user_agent,
+        "--delay",
+        delay.to_s,
+        "--url",
+        website,
+        "download",
+        "-t",
+        @output_dir,
+      )
+
+      _, _status = Process.waitpid2(pid)
+    rescue StandardError => e
+      Vore.logger.error(e)
     end
 
     def user_agent

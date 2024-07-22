@@ -23,6 +23,10 @@ module Vore
           instance
         end
       end
+
+      def level=(level)
+        instance.level = level
+      end
     end
   end
 end

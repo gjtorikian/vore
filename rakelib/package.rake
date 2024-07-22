@@ -34,7 +34,8 @@ end
 task gem: "build:native" # rubocop:disable Rake/Desc
 
 TARGET = ENV["TOOLCHAIN"] || %x(rustc -vV | sed -n 's|host: ||p').strip
-SPIDER_VERSION = "1.99.5"
+SPIDER_VERSION = "1.99.8"
+
 def build
   dist_dir = if TARGET.include?("windows")
     ["dist", TARGET].join("\\")

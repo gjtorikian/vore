@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+CI=1 bundle exec rake test

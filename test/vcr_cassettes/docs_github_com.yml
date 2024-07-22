@@ -1,0 +1,458 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://docs.github.com/0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - docs.github.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '502'
+      Content-Type:
+      - text/html; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=60
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' github.com *.github.com
+        *.githubusercontent.com *.githubassets.com data: githubdocs.azureedge.net
+        placehold.it;object-src ''self'';script-src ''self'' data: githubdocs.azureedge.net;frame-src
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com
+        https://support.github.com https://www.youtube-nocookie.com;frame-ancestors
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com;style-src
+        ''self'' ''unsafe-inline'' data: githubdocs.azureedge.net;child-src ''self'';manifest-src
+        ''self'';upgrade-insecure-requests;base-uri ''self'';form-action ''self'';script-src-attr
+        ''none'''
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - '0'
+      X-Azure-Ref:
+      - 20240722T125754Z-17f67b96dd557lgnu77mysh7n40000000gv000000000ecam
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Age:
+      - '232'
+      Date:
+      - Mon, 22 Jul 2024 13:01:46 GMT
+      X-Served-By:
+      - cache-iad-kiad7000063-IAD, cache-ewr18122-EWR
+      X-Cache:
+      - CONFIG_NOCACHE, MISS, HIT
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1721653306.468850,VS0,VE2
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: "<!doctype html><html lang=en><meta charset=utf-8><title>404 - GitHub
+        Docs</title><style>body{font-family:system-ui,sans-serif;margin:3rem}a{color:#0969DA}</style><p
+        style=font-weight:500>GitHub Docs</p><p>Page not found.</p><p><a href=/>Return
+        to home.</a></p><small>&copy; 2024 GitHub, Inc. &bull; <a href=https://docs.github.com/site-policy/github-terms/github-terms-of-service>Terms</a>
+        &bull; <a href=https://docs.github.com/site-policy/privacy-policies/github-privacy-statement>Privacy</a></small>"
+  recorded_at: Mon, 22 Jul 2024 13:01:46 GMT
+- request:
+    method: get
+    uri: https://docs.github.com/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - docs.github.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '502'
+      Content-Type:
+      - text/html; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=60
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' github.com *.github.com
+        *.githubusercontent.com *.githubassets.com data: githubdocs.azureedge.net
+        placehold.it;object-src ''self'';script-src ''self'' data: githubdocs.azureedge.net;frame-src
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com
+        https://support.github.com https://www.youtube-nocookie.com;frame-ancestors
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com;style-src
+        ''self'' ''unsafe-inline'' data: githubdocs.azureedge.net;child-src ''self'';manifest-src
+        ''self'';upgrade-insecure-requests;base-uri ''self'';form-action ''self'';script-src-attr
+        ''none'''
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - '0'
+      X-Azure-Ref:
+      - 20240722T125809Z-17f67b96dd52crdf65hwvxek9g0000000fb000000000c476
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Age:
+      - '217'
+      Date:
+      - Mon, 22 Jul 2024 13:01:46 GMT
+      X-Served-By:
+      - cache-iad-kiad7000046-IAD, cache-ewr18172-EWR
+      X-Cache:
+      - CONFIG_NOCACHE, MISS, HIT
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1721653307.552718,VS0,VE1
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: "<!doctype html><html lang=en><meta charset=utf-8><title>404 - GitHub
+        Docs</title><style>body{font-family:system-ui,sans-serif;margin:3rem}a{color:#0969DA}</style><p
+        style=font-weight:500>GitHub Docs</p><p>Page not found.</p><p><a href=/>Return
+        to home.</a></p><small>&copy; 2024 GitHub, Inc. &bull; <a href=https://docs.github.com/site-policy/github-terms/github-terms-of-service>Terms</a>
+        &bull; <a href=https://docs.github.com/site-policy/privacy-policies/github-privacy-statement>Privacy</a></small>"
+  recorded_at: Mon, 22 Jul 2024 13:01:46 GMT
+- request:
+    method: get
+    uri: https://docs.github.com/2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - docs.github.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '502'
+      Content-Type:
+      - text/html; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=60
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' github.com *.github.com
+        *.githubusercontent.com *.githubassets.com data: githubdocs.azureedge.net
+        placehold.it;object-src ''self'';script-src ''self'' data: githubdocs.azureedge.net;frame-src
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com
+        https://support.github.com https://www.youtube-nocookie.com;frame-ancestors
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com;style-src
+        ''self'' ''unsafe-inline'' data: githubdocs.azureedge.net;child-src ''self'';manifest-src
+        ''self'';upgrade-insecure-requests;base-uri ''self'';form-action ''self'';script-src-attr
+        ''none'''
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - '0'
+      X-Azure-Ref:
+      - 20240722T125809Z-17f67b96dd58hbps05905wfmvc0000000h90000000006xfm
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Age:
+      - '217'
+      Date:
+      - Mon, 22 Jul 2024 13:01:46 GMT
+      X-Served-By:
+      - cache-iad-kcgs7200150-IAD, cache-ewr18146-EWR
+      X-Cache:
+      - CONFIG_NOCACHE, MISS, HIT
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1721653307.632892,VS0,VE1
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: "<!doctype html><html lang=en><meta charset=utf-8><title>404 - GitHub
+        Docs</title><style>body{font-family:system-ui,sans-serif;margin:3rem}a{color:#0969DA}</style><p
+        style=font-weight:500>GitHub Docs</p><p>Page not found.</p><p><a href=/>Return
+        to home.</a></p><small>&copy; 2024 GitHub, Inc. &bull; <a href=https://docs.github.com/site-policy/github-terms/github-terms-of-service>Terms</a>
+        &bull; <a href=https://docs.github.com/site-policy/privacy-policies/github-privacy-statement>Privacy</a></small>"
+  recorded_at: Mon, 22 Jul 2024 13:01:46 GMT
+- request:
+    method: get
+    uri: https://docs.github.com/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - docs.github.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '502'
+      Content-Type:
+      - text/html; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=60
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' github.com *.github.com
+        *.githubusercontent.com *.githubassets.com data: githubdocs.azureedge.net
+        placehold.it;object-src ''self'';script-src ''self'' data: githubdocs.azureedge.net;frame-src
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com
+        https://support.github.com https://www.youtube-nocookie.com;frame-ancestors
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com;style-src
+        ''self'' ''unsafe-inline'' data: githubdocs.azureedge.net;child-src ''self'';manifest-src
+        ''self'';upgrade-insecure-requests;base-uri ''self'';form-action ''self'';script-src-attr
+        ''none'''
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - '0'
+      X-Azure-Ref:
+      - 20240722T125809Z-17959f84c762cmbzw0pn59pmr40000000h80000000009mbm
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Age:
+      - '217'
+      Date:
+      - Mon, 22 Jul 2024 13:01:46 GMT
+      X-Served-By:
+      - cache-iad-kcgs7200024-IAD, cache-ewr18120-EWR
+      X-Cache:
+      - CONFIG_NOCACHE, MISS, HIT
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1721653307.720835,VS0,VE1
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: "<!doctype html><html lang=en><meta charset=utf-8><title>404 - GitHub
+        Docs</title><style>body{font-family:system-ui,sans-serif;margin:3rem}a{color:#0969DA}</style><p
+        style=font-weight:500>GitHub Docs</p><p>Page not found.</p><p><a href=/>Return
+        to home.</a></p><small>&copy; 2024 GitHub, Inc. &bull; <a href=https://docs.github.com/site-policy/github-terms/github-terms-of-service>Terms</a>
+        &bull; <a href=https://docs.github.com/site-policy/privacy-policies/github-privacy-statement>Privacy</a></small>"
+  recorded_at: Mon, 22 Jul 2024 13:01:46 GMT
+- request:
+    method: get
+    uri: https://docs.github.com/4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - docs.github.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '502'
+      Content-Type:
+      - text/html; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=60
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' github.com *.github.com
+        *.githubusercontent.com *.githubassets.com data: githubdocs.azureedge.net
+        placehold.it;object-src ''self'';script-src ''self'' data: githubdocs.azureedge.net;frame-src
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com
+        https://support.github.com https://www.youtube-nocookie.com;frame-ancestors
+        ''self'' github.com *.github.com *.githubusercontent.com *.githubassets.com;style-src
+        ''self'' ''unsafe-inline'' data: githubdocs.azureedge.net;child-src ''self'';manifest-src
+        ''self'';upgrade-insecure-requests;base-uri ''self'';form-action ''self'';script-src-attr
+        ''none'''
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - '0'
+      X-Azure-Ref:
+      - 20240722T125809Z-17f67b96dd52crdf65hwvxek9g0000000fd0000000008s0d
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Age:
+      - '217'
+      Date:
+      - Mon, 22 Jul 2024 13:01:46 GMT
+      X-Served-By:
+      - cache-iad-kiad7000150-IAD, cache-ewr18127-EWR
+      X-Cache:
+      - CONFIG_NOCACHE, MISS, HIT
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1721653307.801054,VS0,VE1
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: "<!doctype html><html lang=en><meta charset=utf-8><title>404 - GitHub
+        Docs</title><style>body{font-family:system-ui,sans-serif;margin:3rem}a{color:#0969DA}</style><p
+        style=font-weight:500>GitHub Docs</p><p>Page not found.</p><p><a href=/>Return
+        to home.</a></p><small>&copy; 2024 GitHub, Inc. &bull; <a href=https://docs.github.com/site-policy/github-terms/github-terms-of-service>Terms</a>
+        &bull; <a href=https://docs.github.com/site-policy/privacy-policies/github-privacy-statement>Privacy</a></small>"
+  recorded_at: Mon, 22 Jul 2024 13:01:46 GMT
+recorded_with: VCR 6.2.0
