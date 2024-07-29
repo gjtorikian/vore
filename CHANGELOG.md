@@ -1,3 +1,12 @@
+# [v0.5.0] - 29-07-2024
+## What's Changed
+* Update webmock requirement from 3.23 to 3.23.1 by @dependabot in https://github.com/gjtorikian/vore/pull/19
+* Bump spider_cli from 1.99.8 to 1.99.10 by @dependabot in https://github.com/gjtorikian/vore/pull/20
+* Bump rb-sys from 0.9.98 to 0.9.99 by @dependabot in https://github.com/gjtorikian/vore/pull/21
+* Bump spider_cli from 1.99.10 to 1.99.11 by @dependabot in https://github.com/gjtorikian/vore/pull/22
+
+
+**Full Changelog**: https://github.com/gjtorikian/vore/compare/v0.4.0...v0.5.0
 # [v0.4.0] - 22-07-2024
 ## What's Changed
 * Bump spider_cli from 1.99.5 to 1.99.8 by @dependabot in https://github.com/gjtorikian/vore/pull/17
