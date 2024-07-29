@@ -42,6 +42,29 @@ The scraping is managed by [`spider-rs`](https://github.com/spider-rs/spider), s
 | `delete_after_yield`          | Whether the downloaded HTML files are deleted after the yield block finishes. | `true` |
 | `log_level`                   | The logging level. | `:warn` |
 
+### Processing pages
+
+Vore processes HTML using handlers. By default, there are two:
+
+* The `MetaExtractor`, which extracts information from your `title` and `meta` tags
+* The `TagRemover`, which removes unnecessary elements like `header`, `footer`, `script`
+
+If you wish to process the HTML further, you can provide your own handler:
+
+
+```ruby
+Vore::Crawler.new(handlers: [MySpecialHandler.new])
+```
+
+Handlers are defined using [Selma](https://github.com/gjtorikian/selma?tab=readme-ov-file#defining-handlers). Note that the `MetaExtractor` is always included and defined first, but if you pass in anything to the `handler` array, it'll overwrite Vore's other default handlers. You can of course choose to include them manually:
+
+
+```ruby
+# preserve Vore's default content handler while adding your own;
+# `MetaExtractor` is prefixed to the front
+Vore::Crawler.new(handlers: [Vore::Handlers::TagRemover.new, MySpecialHandler.new])
+```
+
 ### In tests
 
 Since the actual HTTP calls occur in a separate process, Vore will not integrate with libraries like VCR or Webmock by default. You'll need to `require "vore/minitest_helper"` to get a function that emulates the HTTP `GET` requests in a way Ruby can interpret.

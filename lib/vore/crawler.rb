@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "handlers/content_extractor"
+require_relative "handlers/meta_extractor"
+require_relative "handlers/tag_remover"
 
 require "listen"
 
@@ -10,13 +11,20 @@ module Vore
     PLATFORM = [:cpu, :os].map { |m| Gem::Platform.local.send(m) }.join("-")
     FILE_SEPERATOR = PLATFORM.include?("windows") ? File::ALT_SEPARATOR : File::SEPARATOR
 
-    attr_reader :output_dir
+    attr_reader :handlers, :output_dir
 
     # Creates a crawler
     # denylist: Sets a denylist filter, allows a regexp, string or array of either to be matched.
-    def initialize(sanitization_config: Vore::Configuration::DEFAULT_SANITIZATION_CONFIG, options: {})
-      @content_extractor = Vore::Handlers::ContentExtractor.new
-      @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: [@content_extractor])
+    def initialize(sanitization_config: Vore::Configuration::DEFAULT_SANITIZATION_CONFIG, handlers: nil, options: {})
+      @meta_extractor = Vore::Handlers::MetaExtractor.new
+
+      @handlers = if handlers.nil?
+        [@meta_extractor, Vore::Handlers::TagRemover.new]
+      else
+        handlers.unshift(@meta_extractor)
+      end
+
+      @selma = Selma::Rewriter.new(sanitizer: Selma::Sanitizer.new(sanitization_config), handlers: @handlers)
       ext = PLATFORM.include?("windows") ? ".exe" : ""
       @executable = File.expand_path([__FILE__, "..", "..", "..", "exe", "vore-spider#{ext}"].join(FILE_SEPERATOR))
       @options = Vore::Configuration::DEFAULT_OPTIONS.merge(options)
@@ -70,32 +78,34 @@ module Vore
       @results[:pages_visited] += 1
 
       html_file = File.read(path).force_encoding("UTF-8")
-      rewritten_html_file = ""
 
       if html_file.empty?
         @results[:unprocessed_pages] << path
         return
       end
 
-      begin
-        rewritten_html_file = @selma.rewrite(html_file)
-      rescue StandardError => e
-        Vore.logger.warn("Error rewriting #{path}: #{e}")
-        @results[:unprocessed_pages] << path
-        return
-      end
+      rewritten_html_file = @selma.rewrite(html_file)
+      return if rewritten_html_file.empty?
 
       # drops the first 3 parts of the path, which are "tmp", "vore", and the site name
       url_path = path.split(FILE_SEPERATOR)[(@parent_output_dir_len + 1)..].join("/")
 
       page = Vore::PageData.new(
         content: rewritten_html_file,
-        title: @content_extractor.title,
-        meta: @content_extractor.meta,
+        title: @meta_extractor.title,
+        meta: @meta_extractor.meta,
         path: url_path,
       )
 
       yield page
+    end
+
+    def rewrite(html_file)
+      @selma.rewrite(html_file)
+    rescue StandardError => e
+      Vore.logger.warn("Error rewriting #{path}: #{e}")
+      @results[:unprocessed_pages] << path
+      ""
     end
 
     def run_command(website, delay: 0)

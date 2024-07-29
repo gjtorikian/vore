@@ -3,6 +3,7 @@
 module Vore
   class Configuration
     DEFAULT_SANITIZATION_CONFIG = Selma::Sanitizer::Config::RELAXED.dup.merge({
+      allow_comments: false,
       allow_doctype: false,
     })
 

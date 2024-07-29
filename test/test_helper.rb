@@ -18,3 +18,11 @@ if ENV["CI"]
     config.hook_into(:webmock)
   end
 end
+
+def fixture_file_path(name)
+  File.join(File.expand_path("fixtures", __dir__), name)
+end
+
+def fixture_file(name)
+  File.read(fixture_file_path(name))
+end
