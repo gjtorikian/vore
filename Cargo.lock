@@ -238,7 +238,7 @@ version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fc229be27b394115abdc89e09500d5030407734d21a143a833eae5f136821bcd"
 dependencies = [
- "compact_str 0.7.1",
+ "compact_str",
  "serde",
 ]
 
@@ -342,20 +342,6 @@ dependencies = [
  "castaway",
  "cfg-if",
  "itoa",
- "ryu",
- "static_assertions",
-]
-
-[[package]]
-name = "compact_str"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6050c3a16ddab2e412160b31f2c871015704239bca62f72f6e5f0be631d3f644"
-dependencies = [
- "castaway",
- "cfg-if",
- "itoa",
- "rustversion",
  "ryu",
  "static_assertions",
 ]
@@ -1800,14 +1786,13 @@ dependencies = [
 
 [[package]]
 name = "spider"
-version = "1.99.16"
+version = "1.99.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "382ec655f7f03a0db98ab4c59ef020ed4752824f9cdc34fc2896ffeea4119436"
+checksum = "b63fa9e7c106fdc31b5456e23194c82ddc9cc787b0ccb8e318ab1a267910c832"
 dependencies = [
  "ahash",
  "bytes",
  "case_insensitive_string",
- "compact_str 0.8.0",
  "cssparser",
  "ego-tree",
  "fast_html5ever",
@@ -1833,9 +1818,9 @@ dependencies = [
 
 [[package]]
 name = "spider_cli"
-version = "1.99.16"
+version = "1.99.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a69763488eece031e76008b3b35f9b1d1e901a112ac67a6bca92619207cc07b6"
+checksum = "f5d60c4a5d4cbea6a3fb8fc6c9daa41243e4086537b1f2e0964839368d30d814"
 dependencies = [
  "clap",
  "env_logger",
