@@ -24,7 +24,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e89da841a80418a9b391ebaea17f5c112ffaaa96f621d2c285b5174da76b9011"
 dependencies = [
  "cfg-if",
- "getrandom",
  "once_cell",
  "version_check",
  "zerocopy",
@@ -1368,9 +1367,9 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.31.0"
+version = "0.36.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1004a344b30a54e2ee58d66a71b32d2db2feb0a31f9a2d302bf0536f15de2a33"
+checksum = "96a05e2e8efddfa51a84ca47cec303fac86c8541b686d37cac5efc0e094417bc"
 dependencies = [
  "memchr",
  "serde",
@@ -1786,9 +1785,9 @@ dependencies = [
 
 [[package]]
 name = "spider"
-version = "1.99.30"
+version = "1.99.36"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "710344c3e74448a445a2eebb42d3199be832774d68e49ac2d8ffe0a4d74f2c7f"
+checksum = "0db6ec9d621ac3032d3a4e82ac007b02f009ce74b63a268ea7e765a176d755dd"
 dependencies = [
  "ahash",
  "bytes",
@@ -1818,9 +1817,9 @@ dependencies = [
 
 [[package]]
 name = "spider_cli"
-version = "1.99.30"
+version = "1.99.36"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a4c28f942b37d31507e5b568f073a08d1593532902a1a3591b442512c413802c"
+checksum = "c007c063a291fab1819b1c2bdcd061fddfdb36ecd12325affda8ae2dd8253c04"
 dependencies = [
  "clap",
  "env_logger",
