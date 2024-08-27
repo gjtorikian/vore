@@ -1785,9 +1785,9 @@ dependencies = [
 
 [[package]]
 name = "spider"
-version = "2.0.9"
+version = "2.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f95796235804ba4d72dc30ae11e9c1c117dc2f80e50aa45aaacf4fe989fe546"
+checksum = "f202bfe462f66b5901afcc1bd879d8afbd9268d1973278edadb3201733932daa"
 dependencies = [
  "ahash",
  "bytes",
@@ -1817,9 +1817,9 @@ dependencies = [
 
 [[package]]
 name = "spider_cli"
-version = "2.0.9"
+version = "2.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d9beed188365f66e5314a4f296608d63230e3cc644ce6ee8788784d1cf85aad"
+checksum = "75fb130f908de572c952638497649ec464c757ddca2bc6087e735778e44299fb"
 dependencies = [
  "clap",
  "env_logger",
