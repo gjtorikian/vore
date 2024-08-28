@@ -14,4 +14,4 @@ magnus = { version = "0.7", features = ["rb-sys"] }
 rb-sys = { version = "*", default-features = false, features = [
     "stable-api-compiled-fallback",
 ] }
-spider_cli = { version = "2.0" }
+spider_cli = { version = "2.1" }
