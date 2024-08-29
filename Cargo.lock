@@ -1817,9 +1817,9 @@ dependencies = [
 
 [[package]]
 name = "spider_cli"
-version = "2.1.8"
+version = "2.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e85811af1db4c083324aa7d2d564eb7617935b2f6327b26fa15e6bb845c91905"
+checksum = "b13ccd9697ff973c53442619523dec63e2bba4528aa64bfb64160d04a9e5a24b"
 dependencies = [
  "clap",
  "env_logger",
