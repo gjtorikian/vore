@@ -16,7 +16,7 @@ group :test do
   gem "minitest", "~> 5.0"
   gem "minitest-focus", "~> 1.2"
   gem "vcr", "~> 6.2"
-  gem "webmock", "3.25.0"
+  gem "webmock", "3.25.1"
 end
 
 group :lint do
