@@ -11,9 +11,9 @@ Gem::Specification.new do |spec|
   spec.summary = "Quickly crawls websites and spits out text sans tags. Powered by Rust."
   spec.homepage = "https://github.com/gjtorikian/vore"
   spec.license = "MIT"
-  spec.required_ruby_version = "~> 3.1"
-  # https://github.com/rubygems/rubygems/pull/5852#issuecomment-1231118509
-  spec.required_rubygems_version = ">= 3.3.22"
+
+  spec.required_ruby_version = ">= 3.2", "< 5"
+  spec.required_rubygems_version = ">= 3.4"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/gjtorikian/vore"
